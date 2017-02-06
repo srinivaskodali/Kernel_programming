@@ -1,0 +1,46 @@
+Atomic Operation:
+	It provide instruction that executes tomically - without interuption. 
+	It is nerver possible for the two atomic operation to occur on the same variable concurrently.
+
+	Atomic integer methods operate on a special data type, atomic_t.
+		use of atomic_t ensures the compiler does not optimize access to the value - 
+	it is important atomic operations receive correct memory address not alias.
+
+	List of functions available :
+		ATOMIC_INIT(int i) At declaration, initialize an atomic_t to i
+	
+		int atomic_read(atomic_t *v) Atomically read the integer value of v
+	
+		void atomic_set(atomic_t *v, int i) Atomically set v equal to i
+	
+		void atomic_add(int i, atomic_t *v) Atomically add i to v
+	
+		void atomic_sub(int i, atomic_t *v) Atomically subtract i from v
+	
+		void atomic_inc(atomic_t *v) Atomically add one to v
+	
+		void atomic_dec(atomic_t *v) Atomically subtract one from v
+	
+		int atomic_sub_and_test(int i, atomic_t *v) Atomically subtract i from v and return true if the result is zero; otherwise false
+	
+		int atomic_add_negative(int i, atomic_t *v) Atomically add i to v and return true if the result is negative; otherwise false
+	
+		int atomic_dec_and_test(atomic_t *v) Atomically decrement v by one and return true if zero; false otherwise
+	
+		int atomic_inc_and_test(atomic_t *v) Atomically increment v by one and return true if the result is zero; false otherwise
+	
+	TODO:
+	Play with atomic bit operations
+		void set_bit(int nr, void *addr) Atomically set the nr-th bit starting from addr
+	
+		void clear_bit(int nr, void *addr) Atomically clear the nr-th bit starting from addr
+	
+		void change_bit(int nr, void *addr) Atomically flip the value of the nr-th bit starting from addr
+	
+		int test_and_set_bit(int nr, void *addr) Atomically set the nr-th bit starting from addr and return the previous value
+	
+		int test_and_clear_bit(int nr, void *addr) Atomically clear the nr-th bit starting from addr and return the previous value
+	
+		int test_and_change_bit(int nr, void *addr) Atomically flip the nr-th bit starting from addr and return the previous value
+	
+		int test_bit(int nr, void *addr) Atomically return the value of the nr-th bit starting from addr
