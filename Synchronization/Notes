@@ -44,3 +44,24 @@ Atomic Operation:
 		int test_and_change_bit(int nr, void *addr) Atomically flip the nr-th bit starting from addr and return the previous value
 	
 		int test_bit(int nr, void *addr) Atomically return the value of the nr-th bit starting from addr
+
+Kthreads:
+	By default kernel threads ignores all the signals. 
+	Use kthread_create and wake_u_process to create and run a thread. Or use kthread_run, it is wrapper function to create and run a thread.
+	Use kthread_stop to stop a running thread. This is a bloking call and wait till the execution of thread. If thread has to be terminated use
+		kthread_should_stop to be used. 
+	kthread_stop will set a stop bit in task_sturct if it is called. kthread_should_stop checks periodically to check whether the thread 
+		received is stop request.
+	usually kthread_stop will be invoked unregister functions. it can call from anywhere.
+
+	Use allow_signal and signal_pending functions to handle a signal inside a kernel thread. signal_pending returns non zero value if a signal 
+		is pending
+
+SpinLocks:
+	A lock can be hold by single thread at any point of time.
+	If a thread is already hold a lock, that lock is called as "contended lock".
+	Threads can acquire a lock immediately on not "contended locks".
+	If the lock is contended, waiting thread spins to check the availability which wasting the processor time.
+	It is advisible to use spin locks for the smaller criticial regions to save processot time.
+	
+	asm/spinlock.h and linux/spinlock.h has the architecture dependedn code and usable interface code respectively.
